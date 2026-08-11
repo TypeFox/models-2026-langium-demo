@@ -1,0 +1,24 @@
+// simple integer variable
+int v1;
+
+// assigning integer expressions
+v1 = 1 + 2 * 3;
+v1 = 3 - v1 * 2;
+
+// a simple struct with two integer properties
+struct MyStruct {
+    p1;
+    p2;
+	// error, since the property name is not unique
+	p1;
+}
+
+// a variable with MyStruct as type
+MyStruct v2;
+
+// assign integer values to the properties
+v2.p1 = (123 - 456) * 2;
+v2.p2 = v2.p1 + 456;
+v2.p2 = v1;
+// error, since MyStruct has no property "p3"
+v2.p3 = v1;
