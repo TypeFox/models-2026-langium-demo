@@ -65,3 +65,8 @@ Read [this guide](./packages/cli/README.md) how to start the editor for the demo
 It is started as VS Code extension and should look like this:
 
 ![VS Code screenshot](./resources/vscode-demo.png)
+
+For a quick-start of the code generation, execute:
+````
+node ./packages/cli/bin/cli generate ./packages/language/examples/first.hello -d ./packages/language/examples
+```

@@ -5,7 +5,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { extractDestinationAndName } from './util.js';
 
-export function generateJavaScript(model: Model, filePath: string, destination: string | undefined): string {
+export function generateTypeScript(model: Model, filePath: string, destination: string | undefined): string {
     const data = extractDestinationAndName(filePath, destination);
     const generatedFilePath = `${path.join(data.destination, data.name)}.ts`;
 
@@ -13,7 +13,9 @@ export function generateJavaScript(model: Model, filePath: string, destination: 
     const structIR = new MultiMap<string, string>();
     for (const struct of model.statements.filter(isStruct)) {
         for (const property of struct.properties) {
-            structIR.add(struct.name, property.name);
+            if (!structIR.has(struct.name, property.name)) {
+                structIR.add(struct.name, property.name);
+            }
         }
     }
 
@@ -23,8 +25,8 @@ export function generateJavaScript(model: Model, filePath: string, destination: 
         ${joinToNode(
             structIR.entriesGroupedByKey(),
             greeting => expandToNode`
-                export class ${greeting[0]} {
-                    ${joinToNode(greeting[1], property => `${property}: number;`, { appendNewLineIfNotEmpty: true })}
+                export type ${greeting[0]} = {
+                    ${joinToNode(greeting[1].sort(), property => `${property}: number;`, { appendNewLineIfNotEmpty: true })}
                 }
             `,
             { appendNewLineIfNotEmpty: 2, skipNewLineAfterLastItem: true }
