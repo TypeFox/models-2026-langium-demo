@@ -47,4 +47,10 @@ export class HelloWorldValidator {
         }
     }
 
+    // More possible validations:
+    // - different names of structs and variables;
+    //   or upper case names for structs and lower case names for variables
+    // - expressions use only int variables, no struct variables;
+    //   or VariableAccess needs to have a property, if it accesses a struct variable
+
 }

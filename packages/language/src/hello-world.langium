@@ -7,19 +7,16 @@ Variable: (isInteger='int' | structType=[Struct:ID]) name=ID ';';
 Assignment: access=VariableAccess '=' value=Addition ';';
 VariableAccess: variable=[Variable:ID] ('.' property=[Property:ID])?;
 
-Addition:
-	Multiplication ({infer BinaryExpr.left=current}
-    operator=('+' | '-') right=Multiplication)*;
+Addition infers Expression:
+	Multiplication ({infer BinaryExpr.left=current} operator=('+' | '-') right=Multiplication)*;
 
-Multiplication:
-	Exponentiation ({infer BinaryExpr.left=current}
-    operator=('*' | '/') right=Exponentiation)*;
+Multiplication infers Expression:
+	Exponentiation ({infer BinaryExpr.left=current} operator=('*' | '/') right=Exponentiation)*;
 
-Exponentiation:
-	Primary ({infer BinaryExpr.left=current}
-    operator='^' right=Exponentiation)?;
+Exponentiation infers Expression:
+	Primary ({infer BinaryExpr.left=current} operator='^' right=Exponentiation)?;
 
-Primary: Parentheses | IntegerLiteral | VariableAccess;
+Primary infers Expression: Parentheses | IntegerLiteral | VariableAccess;
 Parentheses: '(' expr=Addition ')';
 IntegerLiteral: value=INTEGER;
 
