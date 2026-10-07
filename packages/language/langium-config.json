@@ -5,7 +5,7 @@
             "id": "hello-world",
             "grammar": "src/hello-world.langium",
             "fileExtensions": [
-                "hello"
+                ".hello"
             ],
             "textMate": {
                 "out": "syntaxes/hello-world.tmLanguage.json"
