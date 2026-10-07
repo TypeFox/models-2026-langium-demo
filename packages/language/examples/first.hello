@@ -5,12 +5,17 @@ int v1;
 v1 = 1 + 2 * 3;
 v1 = 3 - v1 * 2;
 
+struct MyStruct {
+    p2;
+	p3;
+}
+
 // a simple struct with two integer properties
 struct MyStruct {
     p1;
     p2;
 	// error, since the property name is not unique
-	p1;
+	// p1;
 }
 
 // a variable with MyStruct as type

@@ -2,10 +2,10 @@ grammar ExampleDSL
 
 entry Model: statements+=(Variable | Assignment | Struct)*;
 
-Variable: (isInteger='int' | structType=[Struct:ID]) name=ID ';';
+Variable: (isInteger='int' | structType=[+Struct:ID]) name=ID ';';
 
 Assignment: access=VariableAccess '=' value=Addition ';';
-VariableAccess: variable=[Variable:ID] ('.' property=[Property:ID])?;
+VariableAccess: variable=[Variable:ID] ('.' property=[+Property:ID])?;
 
 Addition infers Expression:
 	Multiplication ({infer BinaryExpr.left=current} operator=('+' | '-') right=Multiplication)*;

@@ -7,9 +7,9 @@ export class HelloWorldScopeProvider extends DefaultScopeProvider {
 		const node = context.container;
 
 		if (isVariableAccess(node) && context.property === VariableAccess.property) {
-			const structType = node.variable.ref?.structType?.ref;
+			const structType = node.variable.ref?.structType;
 			if (structType) {
-				return this.createScopeForNodes(structType.properties);
+				return this.createScopeForNodes(structType.items.map(i => i.ref).flatMap(s => s.properties));
 			} else {
 				return EMPTY_SCOPE;
 			}
